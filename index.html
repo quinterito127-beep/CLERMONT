@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLERMONT — Ropa Venezolana para Caballeros</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --white: #f8f7f4;
+            --cream: #f0ede6;
+            --stone: #c8c0b4;
+            --bronze: #b8945a;
+            --charcoal: #2a2723;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 48px;
+            mix-blend-mode: normal;
+            background: transparent;
+            transition: background 0.4s ease, padding 0.4s ease, border-bottom 0.4s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.96);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 18px 48px;
+            border-bottom: 1px solid rgba(248, 247, 244, 0.08);
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(248, 247, 244, 0.65);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-wa {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(248, 247, 244, 0.65);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-wa:hover {
+            color: var(--white);
+        }
+
+        /* ── HERO ── */
+        #hero {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #hero-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(160deg,
+                    rgba(10, 10, 10, 0.72) 0%,
+                    rgba(10, 10, 10, 0.45) 50%,
+                    rgba(10, 10, 10, 0.78) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 740px;
+            padding: 0 32px;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--bronze);
+            margin-bottom: 28px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.4s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.2rem, 7vw, 5.8rem);
+            font-weight: 300;
+            line-height: 1.05;
+            letter-spacing: 1px;
+            color: var(--white);
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.7s forwards;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--stone);
+        }
+
+        .hero-sub {
+            font-size: 0.82rem;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+            line-height: 1.8;
+            color: rgba(248, 247, 244, 0.62);
+            margin-bottom: 48px;
+            opacity: 0;
+            animation: fadeUp 1s ease 1s forwards;
+        }
+
+        .hero-cta {
+            opacity: 0;
+            animation: fadeUp 1s ease 1.3s forwards;
+            display: inline-flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 16px 48px;
+            background: var(--white);
+            color: var(--black);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: var(--bronze);
+            color: var(--white);
+        }
+
+        .btn-ghost {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 1px solid rgba(248, 247, 244, 0.3);
+            color: rgba(248, 247, 244, 0.75);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--white);
+            color: var(--white);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            animation: fadeUp 1s ease 2s forwards;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: rgba(248, 247, 244, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            animation: scrollDown 2s ease-in-out infinite 2.5s;
+        }
+
+        @keyframes scrollDown {
+            0% {
+                top: -100%;
+            }
+
+            100% {
+                top: 100%;
+            }
+        }
+
+        .scroll-label {
+            font-size: 0.58rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(248, 247, 244, 0.35);
+        }
+
+        /* ── MANIFESTO ── */
+        #manifesto {
+            padding: 140px 48px;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .manifesto-label {
+            font-size: 0.62rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--bronze);
+            padding-top: 10px;
+        }
+
+        .manifesto-body {}
+
+        .manifesto-body h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 4vw, 3.4rem);
+            font-weight: 300;
+            line-height: 1.2;
+            color: var(--white);
+            margin-bottom: 32px;
+        }
+
+        .manifesto-body h2 em {
+            font-style: italic;
+            color: var(--stone);
+        }
+
+        .manifesto-body p {
+            font-size: 0.9rem;
+            line-height: 2;
+            color: rgba(248, 247, 244, 0.55);
+            max-width: 560px;
+        }
+
+        .manifesto-divider {
+            width: 48px;
+            height: 1px;
+            background: var(--bronze);
+            margin: 40px 0;
+        }
+
+        /* ── PILLARS ── */
+        #pillars {
+            padding: 0 48px 140px;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            border: 1px solid rgba(248, 247, 244, 0.08);
+        }
+
+        .pillar {
+            padding: 52px 40px;
+            border-right: 1px solid rgba(248, 247, 244, 0.08);
+        }
+
+        .pillar:last-child {
+            border-right: none;
+        }
+
+        .pillar-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 300;
+            color: rgba(248, 247, 244, 0.08);
+            line-height: 1;
+            margin-bottom: 24px;
+        }
+
+        .pillar-title {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .pillar-text {
+            font-size: 0.82rem;
+            line-height: 1.8;
+            color: rgba(248, 247, 244, 0.45);
+        }
+
+        /* ── COLLECTION TEASER ── */
+        #collection {
+            background: var(--charcoal);
+            padding: 120px 48px;
+            text-align: center;
+        }
+
+        .collection-label {
+            font-size: 0.62rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--bronze);
+            margin-bottom: 20px;
+        }
+
+        .collection-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 300;
+            color: var(--white);
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+
+        .collection-sub {
+            font-size: 0.82rem;
+            color: rgba(248, 247, 244, 0.45);
+            letter-spacing: 1px;
+            margin-bottom: 56px;
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            max-width: 960px;
+            margin: 0 auto 56px;
+        }
+
+        .collection-card {
+            aspect-ratio: 3/4;
+            background: rgba(248, 247, 244, 0.04);
+            display: flex;
+            align-items: flex-end;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(248, 247, 244, 0.06);
+            transition: border-color 0.4s;
+        }
+
+        .collection-card:hover {
+            border-color: rgba(248, 247, 244, 0.2);
+        }
+
+        .collection-card-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            opacity: 0.15;
+        }
+
+        .collection-card-label {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(248, 247, 244, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .coming-badge {
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--bronze);
+            border: 1px solid var(--bronze);
+            padding: 4px 10px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        /* ── COMPRA ── */
+        #compra {
+            padding: 120px 48px;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .compra-label {
+            font-size: 0.62rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--bronze);
+            margin-bottom: 20px;
+        }
+
+        .compra-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 300;
+            line-height: 1.15;
+            color: var(--white);
+            margin-bottom: 24px;
+        }
+
+        .compra-title em {
+            font-style: italic;
+            color: var(--stone);
+        }
+
+        .compra-text {
+            font-size: 0.85rem;
+            line-height: 1.9;
+            color: rgba(248, 247, 244, 0.5);
+            margin-bottom: 40px;
+        }
+
+        .compra-options {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .option-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 22px 24px;
+            border: 1px solid rgba(248, 247, 244, 0.1);
+            text-decoration: none;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .option-card:hover {
+            border-color: rgba(248, 247, 244, 0.3);
+            background: rgba(248, 247, 244, 0.03);
+        }
+
+        .option-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(248, 247, 244, 0.15);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .option-body {}
+
+        .option-title {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .option-sub {
+            font-size: 0.75rem;
+            color: rgba(248, 247, 244, 0.4);
+        }
+
+        .option-arrow {
+            margin-left: auto;
+            color: rgba(248, 247, 244, 0.25);
+            font-size: 1.1rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .option-card:hover .option-arrow {
+            color: var(--white);
+            transform: translateX(4px);
+        }
+
+        /* Envíos panel */
+        .envios-panel {
+            background: rgba(248, 247, 244, 0.03);
+            border: 1px solid rgba(248, 247, 244, 0.08);
+            padding: 48px 40px;
+        }
+
+        .envios-label {
+            font-size: 0.6rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--bronze);
+            margin-bottom: 24px;
+        }
+
+        .envio-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 28px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid rgba(248, 247, 244, 0.06);
+        }
+
+        .envio-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .envio-icon {
+            font-size: 1.1rem;
+            opacity: 0.6;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .envio-body {}
+
+        .envio-title {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+
+        .envio-text {
+            font-size: 0.78rem;
+            line-height: 1.7;
+            color: rgba(248, 247, 244, 0.42);
+        }
+
+        /* ── INSTAGRAM STRIP ── */
+        #instagram {
+            padding: 100px 48px;
+            text-align: center;
+        }
+
+        .ig-label {
+            font-size: 0.62rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--bronze);
+            margin-bottom: 16px;
+        }
+
+        .ig-handles {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            margin-bottom: 56px;
+        }
+
+        .ig-handle {
+            text-decoration: none;
+            text-align: center;
+            transition: opacity 0.3s;
+        }
+
+        .ig-handle:hover {
+            opacity: 0.7;
+        }
+
+        .ig-handle-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--white);
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .ig-handle-sub {
+            font-size: 0.68rem;
+            color: rgba(248, 247, 244, 0.35);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .ig-cta {
+            display: inline-block;
+            padding: 14px 44px;
+            border: 1px solid rgba(248, 247, 244, 0.2);
+            color: rgba(248, 247, 244, 0.65);
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .ig-cta:hover {
+            border-color: var(--white);
+            color: var(--white);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid rgba(248, 247, 244, 0.08);
+            padding: 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+
+        .footer-flag {
+            font-size: 0.78rem;
+            color: rgba(248, 247, 244, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(248, 247, 244, 0.3);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* ── MOBILE ── */
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px 24px;
+            }
+
+            nav.scrolled {
+                padding: 14px 24px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            #manifesto {
+                grid-template-columns: 1fr;
+                padding: 80px 24px;
+                gap: 32px;
+            }
+
+            #pillars {
+                grid-template-columns: 1fr;
+                padding: 0 24px 80px;
+            }
+
+            .pillar {
+                border-right: none;
+                border-bottom: 1px solid rgba(248, 247, 244, 0.08);
+            }
+
+            .pillar:last-child {
+                border-bottom: none;
+            }
+
+            #collection {
+                padding: 80px 24px;
+            }
+
+            .collection-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2px;
+            }
+
+            .collection-grid .collection-card:last-child {
+                display: none;
+            }
+
+            #compra {
+                grid-template-columns: 1fr;
+                padding: 80px 24px;
+                gap: 48px;
+            }
+
+            #instagram {
+                padding: 60px 24px;
+            }
+
+            .ig-handles {
+                gap: 32px;
+            }
+
+            footer {
+                padding: 32px 24px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .collection-grid .collection-card:last-child {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">Clermont</div>
+        <ul class="nav-links">
+            <li><a href="#collection">Colección</a></li>
+            <li><a href="#compra">Comprar</a></li>
+            <li><a href="#instagram">Instagram</a></li>
+        </ul>
+        <a href="https://wa.me/+584241310868" class="nav-wa" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                <path
+                    d="M12 0C5.373 0 0 5.373 0 12c0 2.135.561 4.138 1.541 5.872L.057 23.57c-.083.306.199.588.506.506l5.7-1.484C8 23.44 9.953 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.683-.524-5.203-1.435l-.372-.213-3.878 1.01 1.012-3.878-.213-.372A9.94 9.94 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+            </svg>
+            Pedidos
+        </a>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <video id="hero-video" autoplay muted loop playsinline
+            src="videoropa.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Venezuela · Hecho en Casa</p>
+            <h1 class="hero-title">
+                CLERMONT<br>
+                <em>Moda venezolana<br>para caballeros</em>
+            </h1>
+            <p class="hero-sub">Colecciones de moda masculina diseñadas en Venezuela<br>disponibles al mayor y al detal
+            </p>
+            <div class="hero-cta">
+                <a href="https://wa.me/+584241310868" class="btn-primary" target="_blank">Comprar</a>
+                <a href="#manifesto" class="btn-ghost">Nuestra historia</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span class="scroll-label">Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- MANIFESTO -->
+    <section id="manifesto">
+        <div class="manifesto-label reveal">Acerca de</div>
+        <div class="manifesto-body reveal">
+            <h2>Diseñado en Venezuela,<br><em>para el hombre venezolano</em></h2>
+            <div class="manifesto-divider"></div>
+            <p>CLERMONT nació con una idea simple: que el hombre venezolano merezca ropa que lo represente. Piezas con
+                identidad, con carácter, hechas con cuidado real. Sin intermediarios, sin grandes lujos innecesarios —
+                solo moda con propósito.</p>
+            <br>
+            <p>Ofrecemos nuestras colecciones tanto al detal como al mayor, con envíos a todo el país. Porque vestir
+                bien no debería ser exclusivo.</p>
+        </div>
+    </section>
+
+    <!-- PILLARS -->
+    <section id="pillars">
+        <div class="pillar reveal">
+            <div class="pillar-num">01</div>
+            <div class="pillar-title">Identidad</div>
+            <p class="pillar-text">Cada colección refleja el pulso de Venezuela: su energía, sus calles, su orgullo.
+                Ropa que cuenta de dónde venimos.</p>
+        </div>
+        <div class="pillar reveal">
+            <div class="pillar-num">02</div>
+            <div class="pillar-title">Accesibilidad</div>
+            <p class="pillar-text">Vendemos al detal y al mayor. Para el consumidor final y para el emprendedor que
+                quiere crecer junto a nosotros.</p>
+        </div>
+        <div class="pillar reveal">
+            <div class="pillar-num">03</div>
+            <div class="pillar-title">Alcance</div>
+            <p class="pillar-text">Envíos a toda Venezuela. Sin importar tu ciudad, llevamos CLERMONT a tu puerta con la
+                rapidez que mereces.</p>
+        </div>
+    </section>
+
+    <!-- COLLECTION TEASER -->
+    <section id="collection">
+        <p class="collection-label reveal">Colección</p>
+        <h2 class="collection-title reveal">Las piezas que<br>te definen</h2>
+        <p class="collection-sub reveal">Escribenos por WhatsApp para ver el catálogo completo</p>
+        <div class="collection-grid reveal">
+            <div class="collection-card">
+                <div class="collection-card-icon">👔</div>
+                <div>
+                    <div class="collection-card-label">Camisas</div>
+                    <div class="coming-badge">Ver catálogo</div>
+                </div>
+            </div>
+            <div class="collection-card">
+                <div class="collection-card-icon">👖</div>
+                <div>
+                    <div class="collection-card-label">Pantalones</div>
+                    <div class="coming-badge">Ver catálogo</div>
+                </div>
+            </div>
+            <div class="collection-card">
+                <div class="collection-card-icon">🧥</div>
+                <div>
+                    <div class="collection-card-label">Outerwear</div>
+                    <div class="coming-badge">Ver catálogo</div>
+                </div>
+            </div>
+        </div>
+        <a href="https://wa.me/+584241310868?text=Hola%20CLERMONT%2C%20quiero%20ver%20el%20cat%C3%A1logo%20completo"
+            class="btn-primary" target="_blank" style="text-decoration:none;">Ver catálogo completo</a>
+    </section>
+
+    <!-- COMPRA -->
+    <section id="compra">
+        <div>
+            <p class="compra-label reveal">Cómo comprar</p>
+            <h2 class="compra-title reveal">Simple,<br><em>rápido y directo</em></h2>
+            <p class="compra-text reveal">Hacemos el proceso de compra lo más sencillo posible. Contáctanos por
+                WhatsApp, elige tus piezas y coordina tu envío — sin complicaciones.</p>
+            <div class="compra-options reveal">
+                <a href="https://wa.me/+584241310868?text=Quiero%20comprar%20al%20detal" class="option-card"
+                    target="_blank">
+                    <div class="option-icon">🛍</div>
+                    <div class="option-body">
+                        <div class="option-title">Compra al detal</div>
+                        <div class="option-sub">Para tu uso personal · Piezas individuales</div>
+                    </div>
+                    <span class="option-arrow">→</span>
+                </a>
+                <a href="https://wa.me/+584241310868?text=Quiero%20informaci%C3%B3n%20para%20comprar%20al%20mayor"
+                    class="option-card" target="_blank">
+                    <div class="option-icon">📦</div>
+                    <div class="option-body">
+                        <div class="option-title">Compra al mayor</div>
+                        <div class="option-sub">Para revendedores · Precios especiales por volumen</div>
+                    </div>
+                    <span class="option-arrow">→</span>
+                </a>
+                <a href="https://wa.me/+584241310868?text=Quiero%20informaci%C3%B3n%20de%20env%C3%ADos"
+                    class="option-card" target="_blank">
+                    <div class="option-icon">🚚</div>
+                    <div class="option-body">
+                        <div class="option-title">Envíos nacionales</div>
+                        <div class="option-sub">A toda Venezuela · Coordinamos por WhatsApp</div>
+                    </div>
+                    <span class="option-arrow">→</span>
+                </a>
+            </div>
+        </div>
+        <div class="envios-panel reveal">
+            <div class="envios-label">Info de envíos</div>
+            <div class="envio-item">
+                <div class="envio-icon">🇻🇪</div>
+                <div class="envio-body">
+                    <div class="envio-title">Todo el país</div>
+                    <p class="envio-text">Enviamos a cualquier estado de Venezuela a través de las principales
+                        encomiendas.</p>
+                </div>
+            </div>
+            <div class="envio-item">
+                <div class="envio-icon">💬</div>
+                <div class="envio-body">
+                    <div class="envio-title">Pedidos por WhatsApp</div>
+                    <p class="envio-text">Escríbenos al +58 424-131 0868. Te atendemos y coordinamos tu pedido
+                        directamente.</p>
+                </div>
+            </div>
+            <div class="envio-item">
+                <div class="envio-icon">📋</div>
+                <div class="envio-body">
+                    <div class="envio-title">Mayor y detal</div>
+                    <p class="envio-text">Precios diferenciados para revendedores. Pregunta por nuestro catálogo
+                        mayorista.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INSTAGRAM -->
+    <section id="instagram">
+        <p class="ig-label reveal">Síguenos</p>
+        <div class="ig-handles reveal">
+            <a href="https://instagram.com/clermont.ccs" class="ig-handle" target="_blank">
+                <div class="ig-handle-name">@clermont.ccs</div>
+                <div class="ig-handle-sub">Marca oficial · 1.5k seguidores</div>
+            </a>
+            <div style="width:1px;background:rgba(248,247,244,0.1);align-self:stretch;"></div>
+            <a href="https://instagram.com/los_clermont" class="ig-handle" target="_blank">
+                <div class="ig-handle-name">@los_clermont</div>
+                <div class="ig-handle-sub">Tienda oficial · 131k seguidores</div>
+            </a>
+        </div>
+        <a href="https://instagram.com/los_clermont" class="ig-cta reveal" target="_blank">Ver en Instagram</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div>
+            <div class="footer-brand">Clermont</div>
+            <div class="footer-flag">Marca 100% venezolana 🇻🇪</div>
+        </div>
+        <ul class="footer-links">
+            <li><a href="https://wa.me/+584241310868" target="_blank">WhatsApp</a></li>
+            <li><a href="https://instagram.com/los_clermont" target="_blank">Instagram</a></li>
+            <li><a href="https://wa.me/+584241310868?text=Quiero%20comprar%20al%20mayor" target="_blank">Mayorista</a>
+            </li>
+        </ul>
+    </footer>
+
+    <script>
+        // Nav scroll background
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        }, { passive: true });
+
+        // Scroll reveal
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    // Stagger siblings
+                    const parent = entry.target.parentElement;
+                    const siblings = parent.querySelectorAll('.reveal');
+                    let delay = 0;
+                    siblings.forEach((sib, idx) => {
+                        if (sib === entry.target) delay = idx * 80;
+                    });
+                    setTimeout(() => entry.target.classList.add('visible'), delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+
+</html>
